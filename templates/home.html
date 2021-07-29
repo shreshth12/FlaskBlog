@@ -2,9 +2,16 @@
     {% block content %}
     
         {% for argument in post %}
-        <h1>{{argument.Name}}</h1>
-        <p>His age is : {{argument.age}} </p>
-        <p>His message was posted on {{argument.date_posted}} and his message was {{argument.content}}</p>
+        <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#">{{ argument.Name }}</a>
+                <small class="text-muted">{{ argument.date_posted }}</small>
+              </div>
+              <h2><a class="article-title" href="#">{{ argument.age }}</a></h2>
+              <p class="article-content">{{ argument.content }}</p>
+            </div>
+          </article>
         {% endfor %}
         
     {% endblock content %}
