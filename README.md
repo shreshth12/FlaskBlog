@@ -7,3 +7,5 @@ Day - 2) Completed with template inhertiance and did all the styling required on
 
 Day - 3) Finally finished the login and registration page with full functionality. Login page is yet to be properly set up using a database engine. Learned how wt-forms in flask work and how we can use it to input data from the user and perform automatic validation checks.
 
+Day - 4) Working on my database. Created the database using sqlalchemy and created its user and posts structure. Will work on integrating it with the application tomorrow.
+
