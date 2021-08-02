@@ -9,3 +9,5 @@ Day - 3) Finally finished the login and registration page with full functionalit
 
 Day - 4) Working on my database. Created the database using sqlalchemy and created its user and posts structure. Will work on integrating it with the application tomorrow.
 
+Day - 5) Finished with Database creation and package management tools. Now it is time to merge the database branch with the main branch. (All errors fixed and web server works good!)
+
