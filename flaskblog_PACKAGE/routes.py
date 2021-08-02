@@ -1,8 +1,8 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm, LoginForm
+from flask import render_template, url_for, flash, redirect
+from flaskblog_PACKAGE import app
+from flaskblog_PACKAGE.forms import RegistrationForm, LoginForm
+from flaskblog_PACKAGE.models import User, Post
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '04106331e37053a7'
 data = [
     {'Name' : 'Shreshth',
     'age' : 21,
@@ -46,6 +46,3 @@ def login():
         else:
             flash(f'Wrong credentials, try again', 'danger')
     return render_template("login.html", title = 'LOGIN PAGE', form = form)
-
-if __name__ == "__main__":
-    app.run(debug=True)
