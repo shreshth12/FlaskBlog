@@ -11,3 +11,6 @@ Day - 4) Working on my database. Created the database using sqlalchemy and creat
 
 Day - 5) Finished with Database creation and package management tools. Now it is time to merge the database branch with the main branch. (All errors fixed and web server works good!)
 
+Day - 6) Done with the user authentication page and logic. Used the flask extension of flask_login for the login login and used bcrypt to hash the password and then store it into the sqlite database. 
+ 
+
