@@ -1,7 +1,10 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
+from sqlalchemy.orm.query import Query
+from wtforms.validators import Email
 from flaskblog_PACKAGE import app, db, bcrypt
 from flaskblog_PACKAGE.forms import RegistrationForm, LoginForm
 from flaskblog_PACKAGE.models import User, Post
+from flask_login import login_user, current_user, logout_user, login_required
 
 data = [
     {'Name' : 'Shreshth',
@@ -30,6 +33,8 @@ def about():
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('homePage'))
     form = RegistrationForm()
     if form.validate_on_submit():
         pw_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -42,11 +47,27 @@ def register():
 
 @app.route("/login",methods = ['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('homePage'))
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'admin@blog.com' and form.password.data == '123':
-            flash(f'Successful login!', 'success')
-            return redirect(url_for('homePage'))
+        user = User.query.filter_by(email = form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            flash(f'You are now logged in!', 'success')
+            return redirect(next_page) if next_page else redirect(url_for('homePage'))
         else:
             flash(f'Wrong credentials, try again', 'danger')
     return render_template("login.html", title = 'LOGIN PAGE', form = form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('homePage'))
+
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template("account.html", title = 'ACCOUNT PAGE')
