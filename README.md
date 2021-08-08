@@ -13,4 +13,4 @@ Day - 5) Finished with Database creation and package management tools. Now it is
 
 Day - 6) Done with the user authentication page and logic. Used the flask extension of flask_login for the login login and used bcrypt to hash the password and then store it into the sqlite database. 
  
-
+Day - 7) Completed the account update page. Now you can change your username and email, as well as your profile picture after you have created your account. 
