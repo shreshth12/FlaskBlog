@@ -5,29 +5,16 @@ from flask import render_template, url_for, flash, redirect, request
 from sqlalchemy.orm.query import Query
 from wtforms.validators import Email
 from flaskblog_PACKAGE import app, db, bcrypt
-from flaskblog_PACKAGE.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flaskblog_PACKAGE.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flask_login import login_user, current_user, logout_user, login_required
-from flaskblog_PACKAGE.models import User
+from flaskblog_PACKAGE.models import Post, User
 
-data = [
-    {'Name' : 'Shreshth',
-    'age' : 21,
-    'content' : 'Do not give up',
-    'weight' : 'I won\'t tell you',
-    'date_posted' : '29th July',
-    },
 
-    {'Name' : 'Sarthak',
-    'age' : 16,
-    'content' : 'Do not give up when your in US',
-    'weight' : 'I won\'t tell you',
-    'date_posted' : '29th July',
-    }
-]
 
 @app.route("/")
 @app.route("/home")
 def homePage():
+    data = Post.query.all()
     return render_template("home.html", post = data, title = 'HOMEPAGE')
 
 @app.route("/about")
@@ -102,3 +89,21 @@ def account():
          
     image_file = url_for('static', filename='profile_pics/'+ current_user.image_file)
     return render_template("account.html", title = 'ACCOUNT PAGE', image_file = image_file, form = form)
+
+
+@login_required
+@app.route("/post/new",methods = ['GET', 'POST'])
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title = form.title.data, content = form.content.data, author= current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created', 'success')
+        return redirect(url_for('homePage'))
+    return render_template("create_post.html", title = "new_post", form = form)
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title = post.title, post = post)

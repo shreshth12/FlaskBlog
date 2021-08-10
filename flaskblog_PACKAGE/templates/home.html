@@ -3,12 +3,13 @@
     
         {% for argument in post %}
         <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics/' + argument.author.image_file) }}">
             <div class="media-body">
               <div class="article-metadata">
-                <a class="mr-2" href="#">{{ argument.Name }}</a>
-                <small class="text-muted">{{ argument.date_posted }}</small>
+                <a class="mr-2" href="#">{{ argument.author.username }}</a>
+                <small class="text-muted">{{ argument.date_posted.strftime('%Y-%m-%d') }}</small>
               </div>
-              <h2><a class="article-title" href="#">{{ argument.age }}</a></h2>
+              <h2><a class="article-title" href=" {{ url_for('post', post_id = argument.id) }} ">{{ argument.title }}</a></h2>
               <p class="article-content">{{ argument.content }}</p>
             </div>
           </article>
