@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
     {% block content %}
     
-        {% for argument in post %}
+        {% for argument in post.items %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics/' + argument.author.image_file) }}">
             <div class="media-body">
               <div class="article-metadata">
-                <a class="mr-2" href="#">{{ argument.author.username }}</a>
+                <a class="mr-2" href="{{ url_for('user_posts', username = argument.author.username) }}">{{ argument.author.username }}</a>
                 <small class="text-muted">{{ argument.date_posted.strftime('%Y-%m-%d') }}</small>
               </div>
               <h2><a class="article-title" href=" {{ url_for('post', post_id = argument.id) }} ">{{ argument.title }}</a></h2>
@@ -14,6 +14,13 @@
             </div>
           </article>
         {% endfor %}
-        
+
+        {% for page_num in post.iter_pages() %}
+          {% if page_num %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('homePage', page = page_num) }}"> {{ page_num }}</a>
+          {% else %}
+            ...
+          {% endif %}
+        {% endfor %}
     {% endblock content %}
 

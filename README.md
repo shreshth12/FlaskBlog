@@ -16,3 +16,7 @@ Day - 6) Done with the user authentication page and logic. Used the flask extens
 Day - 7) Completed the account update page. Now you can change your username and email, as well as your profile picture after you have created your account. 
 
 Day - 8) Completed the CRUD funtionality of the web application. Now you can update, create or delete the post you made. I learned about bootstrab model and how to update and delete from a sqlite database 
+
+Day - 9) Added pagination to the application. Now every single page on the website shows 5 posts and you can nagivate to the next page by clicking on buttons on the bottom. 
+
+AT THIS POINT THE PROJECT IS ALMOST COMPLETE or Completed and ready to be hosted.
