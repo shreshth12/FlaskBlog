@@ -20,3 +20,7 @@ Day - 8) Completed the CRUD funtionality of the web application. Now you can upd
 Day - 9) Added pagination to the application. Now every single page on the website shows 5 posts and you can nagivate to the next page by clicking on buttons on the bottom. 
 
 AT THIS POINT THE PROJECT IS ALMOST COMPLETE or Completed and ready to be hosted.
+
+Day - 10) Project is finally completed and is hosted on AWS. You can check it out here : http://myflaskappenv.eba-chvuzsyv.us-east-1.elasticbeanstalk.com/
+
+THANKS!
